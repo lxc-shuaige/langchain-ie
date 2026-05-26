@@ -1,0 +1,28 @@
+Netflix - Frontend Developer
+
+Position: Frontend Developer
+Company: Netflix
+Location: San Francisco, CA
+Salary: $70k-$100k annually
+
+About the Role:
+We are looking for a talented Frontend Developer to join our growing team at Netflix. You will work on cutting-edge projects and collaborate with cross-functional teams to deliver high-quality solutions.
+
+Key Responsibilities:
+- Design, develop and maintain scalable backend services and APIs.
+- Collaborate with product managers and frontend engineers to ship new features.
+- Participate in code reviews and contribute to engineering best practices.
+- Mentor junior engineers and help grow the team.
+- Optimize application performance and reliability.
+
+Qualifications:
+- Education: Bachelor's degree in related field.
+- Experience: 4-6 years of experience.
+- Proficiency in Python, MongoDB, AWS and related technologies.
+- Strong problem-solving skills and attention to detail.
+- Excellent communication and teamwork abilities.
+
+Benefits:
+Competitive compensation package, health insurance, 401(k) matching, flexible PTO, remote-friendly culture.
+
+To apply, please send your resume to careers@netflix.com

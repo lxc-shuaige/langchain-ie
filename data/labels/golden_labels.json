@@ -1,0 +1,487 @@
+[
+  {
+    "id": "zh_090",
+    "language": "zh",
+    "labels": {
+      "job_title": "全栈开发工程师",
+      "company_name": "阿里巴巴",
+      "work_location": "成都",
+      "salary": "18k-28k/月",
+      "education": "硕士",
+      "experience": "10年以上经验",
+      "skills": [
+        "AWS",
+        "Elasticsearch",
+        "Git",
+        "Hadoop",
+        "Nginx",
+        "微服务架构",
+        "敏捷开发"
+      ]
+    }
+  },
+  {
+    "id": "en_031",
+    "language": "en",
+    "labels": {
+      "job_title": "Database Administrator",
+      "company_name": "Canva",
+      "work_location": "Singapore",
+      "salary": "Competitive salary",
+      "education": "Bachelor's degree in related field",
+      "experience": "Entry level welcome",
+      "skills": [
+        "Agile",
+        "Angular",
+        "PostgreSQL",
+        "PyTorch",
+        "React",
+        "Spark",
+        "System Design"
+      ]
+    }
+  },
+  {
+    "id": "zh_040",
+    "language": "zh",
+    "labels": {
+      "job_title": "DevOps工程师",
+      "company_name": "阿里巴巴",
+      "work_location": "南京",
+      "salary": "薪资面谈",
+      "education": "本科",
+      "experience": "2年以上经验",
+      "skills": [
+        "Data Warehouse",
+        "Docker",
+        "Kubernetes",
+        "Nginx",
+        "TensorFlow",
+        "Vue.js",
+        "敏捷开发"
+      ]
+    }
+  },
+  {
+    "id": "en_016",
+    "language": "en",
+    "labels": {
+      "job_title": "Engineering Manager",
+      "company_name": "Google",
+      "work_location": "Chicago, IL",
+      "salary": "$90k-$130k annually",
+      "education": "Bachelor's degree required",
+      "experience": "4-6 years of experience",
+      "skills": [
+        "Docker",
+        "Flink",
+        "GraphQL",
+        "PostgreSQL"
+      ]
+    }
+  },
+  {
+    "id": "zh_088",
+    "language": "zh",
+    "labels": {
+      "job_title": "财务分析师",
+      "company_name": "美团",
+      "work_location": "上海",
+      "salary": "20k-35k/月",
+      "education": "博士",
+      "experience": "1-3年经验",
+      "skills": [
+        "CI/CD",
+        "Elasticsearch",
+        "PyTorch",
+        "Rust",
+        "Spring Boot",
+        "TensorFlow"
+      ]
+    }
+  },
+  {
+    "id": "zh_001",
+    "language": "zh",
+    "labels": {
+      "job_title": "技术支持工程师",
+      "company_name": "阿里巴巴",
+      "work_location": "合肥",
+      "salary": "10k-18k/月",
+      "education": "本科及以上学历",
+      "experience": "5-8年经验",
+      "skills": [
+        "C++",
+        "Flink",
+        "PyTorch",
+        "Python",
+        "React",
+        "TensorFlow",
+        "分布式系统"
+      ]
+    }
+  },
+  {
+    "id": "zh_034",
+    "language": "zh",
+    "labels": {
+      "job_title": "产品经理",
+      "company_name": "阿里巴巴",
+      "work_location": "深圳",
+      "salary": "35k-55k/月",
+      "education": "博士优先",
+      "experience": "10年以上经验",
+      "skills": [
+        "Git",
+        "Linux",
+        "Spring Boot",
+        "TypeScript",
+        "微服务架构"
+      ]
+    }
+  },
+  {
+    "id": "zh_059",
+    "language": "zh",
+    "labels": {
+      "job_title": "财务分析师",
+      "company_name": "滴滴出行",
+      "work_location": "合肥",
+      "salary": "面议",
+      "education": "硕士",
+      "experience": "5-8年经验",
+      "skills": [
+        "CI/CD",
+        "Kafka",
+        "PyTorch",
+        "Rust",
+        "Spark",
+        "TensorFlow",
+        "敏捷开发"
+      ]
+    }
+  },
+  {
+    "id": "en_015",
+    "language": "en",
+    "labels": {
+      "job_title": "Data Scientist",
+      "company_name": "Tesla",
+      "work_location": "Sydney, Australia",
+      "salary": "$120k-$180k annually",
+      "education": "Bachelor's degree in related field",
+      "experience": "10+ years of experience",
+      "skills": [
+        "Agile",
+        "C++",
+        "Docker",
+        "Node.js",
+        "TensorFlow",
+        "TypeScript"
+      ]
+    }
+  },
+  {
+    "id": "zh_033",
+    "language": "zh",
+    "labels": {
+      "job_title": "数据分析师",
+      "company_name": "网易集团",
+      "work_location": "天津",
+      "salary": "30k-50k/月",
+      "education": "硕士及以上",
+      "experience": "应届生可投",
+      "skills": [
+        "Azure",
+        "Hadoop",
+        "Kubernetes",
+        "Nginx",
+        "React",
+        "Vue.js"
+      ]
+    }
+  },
+  {
+    "id": "zh_039",
+    "language": "zh",
+    "labels": {
+      "job_title": "技术支持工程师",
+      "company_name": "科大讯飞",
+      "work_location": "天津",
+      "salary": "年薪20万-30万",
+      "education": "本科及以上学历",
+      "experience": "5年以上经验",
+      "skills": [
+        "CI/CD",
+        "Hadoop",
+        "Node.js",
+        "PostgreSQL",
+        "PyTorch"
+      ]
+    }
+  },
+  {
+    "id": "en_040",
+    "language": "en",
+    "labels": {
+      "job_title": "Tech Lead",
+      "company_name": "Canva",
+      "work_location": "New York, NY",
+      "salary": "$70k-$100k annually",
+      "education": "Bachelor's minimum",
+      "experience": "1-3 years of experience",
+      "skills": [
+        "Django",
+        "Go",
+        "SQL",
+        "Spark",
+        "Vue"
+      ]
+    }
+  },
+  {
+    "id": "en_005",
+    "language": "en",
+    "labels": {
+      "job_title": "Tech Lead",
+      "company_name": "Tesla",
+      "work_location": "Chicago, IL",
+      "salary": "$90k-$130k annually",
+      "education": "Master's or PhD",
+      "experience": "7+ years of experience",
+      "skills": [
+        "CI/CD",
+        "Django",
+        "GCP",
+        "Spring",
+        "TensorFlow"
+      ]
+    }
+  },
+  {
+    "id": "zh_018",
+    "language": "zh",
+    "labels": {
+      "job_title": "技术支持工程师",
+      "company_name": "哔哩哔哩",
+      "work_location": "上海",
+      "salary": "薪资面谈",
+      "education": "本科及以上",
+      "experience": "3-5年工作经验",
+      "skills": [
+        "Java",
+        "Linux",
+        "RabbitMQ",
+        "Rust",
+        "TensorFlow",
+        "Vue.js"
+      ]
+    }
+  },
+  {
+    "id": "zh_071",
+    "language": "zh",
+    "labels": {
+      "job_title": "iOS开发工程师",
+      "company_name": "拼多多",
+      "work_location": "深圳",
+      "salary": "年薪30万-50万",
+      "education": "本科及以上",
+      "experience": "10年以上经验",
+      "skills": [
+        "Flink",
+        "Java",
+        "MySQL",
+        "Redis"
+      ]
+    }
+  },
+  {
+    "id": "en_041",
+    "language": "en",
+    "labels": {
+      "job_title": "Financial Analyst",
+      "company_name": "Shopify",
+      "work_location": "Seattle, WA",
+      "salary": "$100k-$150k annually",
+      "education": "Master's degree in Computer Science",
+      "experience": "10+ years of experience",
+      "skills": [
+        "Azure",
+        "Node.js",
+        "Terraform"
+      ]
+    }
+  },
+  {
+    "id": "zh_065",
+    "language": "zh",
+    "labels": {
+      "job_title": "全栈开发工程师",
+      "company_name": "京东集团",
+      "work_location": "长沙",
+      "salary": "年薪20万-30万",
+      "education": "985/211本科及以上",
+      "experience": "2年以上经验",
+      "skills": [
+        "C++",
+        "MongoDB",
+        "RabbitMQ"
+      ]
+    }
+  },
+  {
+    "id": "en_042",
+    "language": "en",
+    "labels": {
+      "job_title": "Marketing Specialist",
+      "company_name": "Uber",
+      "work_location": "Denver, CO",
+      "salary": "$150k-$200k annually",
+      "education": "Master's degree preferred",
+      "experience": "5+ years of experience",
+      "skills": [
+        "C++",
+        "GraphQL",
+        "TypeScript"
+      ]
+    }
+  },
+  {
+    "id": "en_011",
+    "language": "en",
+    "labels": {
+      "job_title": "Financial Analyst",
+      "company_name": "Slack",
+      "work_location": "Toronto, Canada",
+      "salary": "$60k-$85k annually",
+      "education": "Master's degree in Computer Science",
+      "experience": "1-3 years of experience",
+      "skills": [
+        "Go",
+        "PostgreSQL",
+        "TensorFlow"
+      ]
+    }
+  },
+  {
+    "id": "zh_083",
+    "language": "zh",
+    "labels": {
+      "job_title": "iOS开发工程师",
+      "company_name": "腾讯科技",
+      "work_location": "杭州",
+      "salary": "35k-55k/月",
+      "education": "本科",
+      "experience": "1-3年经验",
+      "skills": [
+        "AWS",
+        "C++",
+        "Data Warehouse",
+        "Elasticsearch",
+        "Git",
+        "Java",
+        "Linux",
+        "React"
+      ]
+    }
+  },
+  {
+    "id": "zh_004",
+    "language": "zh",
+    "labels": {
+      "job_title": "数据库管理员",
+      "company_name": "大疆创新",
+      "work_location": "苏州",
+      "salary": "薪资面谈",
+      "education": "本科",
+      "experience": "3年以上相关经验",
+      "skills": [
+        "Docker",
+        "React",
+        "Vue.js"
+      ]
+    }
+  },
+  {
+    "id": "en_050",
+    "language": "en",
+    "labels": {
+      "job_title": "Security Engineer",
+      "company_name": "Microsoft",
+      "work_location": "Los Angeles, CA",
+      "salary": "$100k-$150k annually",
+      "education": "Master's degree in Computer Science",
+      "experience": "3-5 years of experience",
+      "skills": [
+        "Azure",
+        "Docker",
+        "Flink",
+        "GraphQL",
+        "Redis",
+        "Spark"
+      ]
+    }
+  },
+  {
+    "id": "zh_080",
+    "language": "zh",
+    "labels": {
+      "job_title": "Android开发工程师",
+      "company_name": "京东集团",
+      "work_location": "广州",
+      "salary": "年薪40万-60万",
+      "education": "博士",
+      "experience": "1-3年经验",
+      "skills": [
+        "Nginx",
+        "Spring Boot",
+        "Vue.js"
+      ]
+    }
+  },
+  {
+    "id": "en_001",
+    "language": "en",
+    "labels": {
+      "job_title": "Database Administrator",
+      "company_name": "Airbnb",
+      "work_location": "Austin, TX",
+      "salary": "$150k-$200k annually",
+      "education": "Bachelor's or above",
+      "experience": "7+ years of experience",
+      "skills": [
+        "Django",
+        "Docker",
+        "Java",
+        "Microservices",
+        "Node.js",
+        "React",
+        "Rust",
+        "Terraform"
+      ]
+    }
+  },
+  {
+    "id": "zh_013",
+    "language": "zh",
+    "labels": {
+      "job_title": "Python后端开发",
+      "company_name": "快手科技",
+      "work_location": "北京",
+      "salary": "10k-18k/月",
+      "education": "大专及以上",
+      "experience": "2年以上经验",
+      "skills": [
+        "CI/CD",
+        "Elasticsearch",
+        "Kafka",
+        "Linux",
+        "MySQL",
+        "TensorFlow",
+        "TypeScript",
+        "敏捷开发"
+      ]
+    }
+  }
+]

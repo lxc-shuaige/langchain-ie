@@ -1,0 +1,28 @@
+Uber - Marketing Specialist
+
+Position: Marketing Specialist
+Company: Uber
+Location: Denver, CO
+Salary: $150k-$200k annually
+
+About the Role:
+We are looking for a talented Marketing Specialist to join our growing team at Uber. You will work on cutting-edge projects and collaborate with cross-functional teams to deliver high-quality solutions.
+
+Key Responsibilities:
+- Design, develop and maintain scalable backend services and APIs.
+- Collaborate with product managers and frontend engineers to ship new features.
+- Participate in code reviews and contribute to engineering best practices.
+- Mentor junior engineers and help grow the team.
+- Optimize application performance and reliability.
+
+Qualifications:
+- Education: Master's degree preferred.
+- Experience: 5+ years of experience.
+- Proficiency in TypeScript, C++, GraphQL and related technologies.
+- Strong problem-solving skills and attention to detail.
+- Excellent communication and teamwork abilities.
+
+Benefits:
+Competitive compensation package, health insurance, 401(k) matching, flexible PTO, remote-friendly culture.
+
+To apply, please send your resume to careers@uber.com

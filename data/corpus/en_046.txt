@@ -1,0 +1,28 @@
+Canva - Machine Learning Engineer
+
+Position: Machine Learning Engineer
+Company: Canva
+Location: Tokyo, Japan
+Salary: $100k-$150k annually
+
+About the Role:
+We are looking for a talented Machine Learning Engineer to join our growing team at Canva. You will work on cutting-edge projects and collaborate with cross-functional teams to deliver high-quality solutions.
+
+Key Responsibilities:
+- Design, develop and maintain scalable backend services and APIs.
+- Collaborate with product managers and frontend engineers to ship new features.
+- Participate in code reviews and contribute to engineering best practices.
+- Mentor junior engineers and help grow the team.
+- Optimize application performance and reliability.
+
+Qualifications:
+- Education: Bachelor's minimum.
+- Experience: 7+ years of experience.
+- Proficiency in GraphQL, Angular, CI/CD and related technologies.
+- Strong problem-solving skills and attention to detail.
+- Excellent communication and teamwork abilities.
+
+Benefits:
+Competitive compensation package, health insurance, 401(k) matching, flexible PTO, remote-friendly culture.
+
+To apply, please send your resume to careers@canva.com
