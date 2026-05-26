@@ -43,7 +43,7 @@ def _rule_first(regex, ner, dictionary, llm, uie, routing) -> dict:
     extractor_breakdown = {}
     conflicts = []
 
-    rule_fields = {"salary", "education", "experience", "work_location"}
+    rule_fields = {"salary", "education", "experience", "work_location", "contact_info"}
     semantic_fields = {"job_title", "company_name", "skills"}
 
     for f in FIELDS:

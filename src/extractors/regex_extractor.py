@@ -14,6 +14,7 @@ class RegexExtractor(BaseExtractor):
             r"(\d{1,2}\s*[-~]\s*\d{1,2}\s*[kK]\s*/\s*月)",
             r"(月薪\s*\d{1,2}\s*[-~]\s*\d{1,2}\s*[kK])",
             r"(薪资[：:]?\s*\d{1,2}[kK]\s*[-~]\s*\d{1,2}[kK])",
+            r"(面议|薪资面谈|薪资面议)",
         ],
         "education": [
             r"(大专|本科|硕士|博士)(及以上|及以上学历|优先)?",
@@ -27,6 +28,13 @@ class RegexExtractor(BaseExtractor):
         "work_location": [
             r"(工作地点[：:]\s*[一-鿿]+)",
             r"([一-鿿]{2,3}[市省区县])",
+        ],
+        "contact_info": [
+            r"(1[3-9]\d{9})",
+            r"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
+            r"(电话[：:]\s*1[3-9]\d{9})",
+            r"(邮箱[：:]\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
+            r"(联系电话[：:]\s*\d[\d\s-]{7,15})",
         ],
     }
 
@@ -51,6 +59,12 @@ class RegexExtractor(BaseExtractor):
         "work_location": [
             r"(Location[：:]\s*[\w\s,]+)",
             r"(Location[：:]\s*Remote)",
+        ],
+        "contact_info": [
+            r"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
+            r"(\+?\d[\d\s-]{7,15})",
+            r"(Phone[：:]\s*\+?\d[\d\s-]{7,15})",
+            r"(Email[：:]\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
         ],
     }
 

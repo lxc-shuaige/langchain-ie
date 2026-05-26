@@ -4,6 +4,7 @@ from src.state import ExtractionState
 from src.graph.nodes import (
     preprocess_node,
     analyze_node,
+    ocr_node,
     regex_node,
     ner_node,
     dictionary_node,
@@ -11,7 +12,7 @@ from src.graph.nodes import (
     uie_node,
     fusion_node,
 )
-from src.graph.router import route_after_analyze
+from src.graph.router import route_after_analyze, route_after_preprocess
 
 
 def build_graph() -> StateGraph:
@@ -21,6 +22,7 @@ def build_graph() -> StateGraph:
     # 添加节点
     builder.add_node("preprocess", preprocess_node)
     builder.add_node("analyze", analyze_node)
+    builder.add_node("ocr", ocr_node)
     builder.add_node("regex", regex_node)
     builder.add_node("ner", ner_node)
     builder.add_node("dictionary", dictionary_node)
@@ -31,8 +33,18 @@ def build_graph() -> StateGraph:
     # 设置入口
     builder.set_entry_point("preprocess")
 
-    # 边: preprocess → analyze
-    builder.add_edge("preprocess", "analyze")
+    # 条件边: preprocess → ocr (image) 或 analyze (text)
+    builder.add_conditional_edges(
+        "preprocess",
+        route_after_preprocess,
+        {
+            "ocr": "ocr",
+            "analyze": "analyze",
+        },
+    )
+
+    # ocr → analyze
+    builder.add_edge("ocr", "analyze")
 
     # 条件路由: analyze → [regex, ner, dictionary, llm_extract, uie]
     builder.add_conditional_edges(

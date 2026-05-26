@@ -12,6 +12,7 @@ from src.fusion.merger import merge_results
 
 # 延迟初始化：避免在模块加载时就下载模型
 _extractors: dict[str, object] = {}
+_ocr = None
 
 
 def _get_extractor(name: str):
@@ -29,13 +30,43 @@ def _get_extractor(name: str):
     return _extractors[name]
 
 
+def _get_ocr():
+    global _ocr
+    if _ocr is None:
+        from src.ocr.ocr_extractor import OCRExtractor
+        _ocr = OCRExtractor()
+    return _ocr
+
+
 def preprocess_node(state: ExtractionState) -> dict:
-    """预处理节点：清洗、分句、分词。"""
+    """预处理节点：清洗、分句、分词。图片输入跳过文本预处理。"""
+    if state.get("input_type") == "image":
+        return {}
     text = state.get("raw_text", "")
     cleaned = clean_text(text)
     sentences = split_sentences(cleaned)
     tokens = tokenize(cleaned)
     return {
+        "cleaned_text": cleaned,
+        "sentences": sentences,
+        "tokens": tokens,
+    }
+
+
+def ocr_node(state: ExtractionState) -> dict:
+    """OCR 节点：对图片运行 PaddleOCR，然后清洗、分句、分词。"""
+    image_path = state.get("image_path", "")
+    language = state.get("language", "zh")
+
+    ocr = _get_ocr()
+    raw_ocr = ocr.extract(image_path, language)
+
+    cleaned = clean_text(raw_ocr)
+    sentences = split_sentences(cleaned)
+    tokens = tokenize(cleaned)
+
+    return {
+        "ocr_text": raw_ocr,
         "cleaned_text": cleaned,
         "sentences": sentences,
         "tokens": tokens,

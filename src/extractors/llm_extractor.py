@@ -20,6 +20,7 @@ SYSTEM_PROMPT_ZH = """你是一个信息抽取助手。从给定的招聘文本�
 - education: 学历要求
 - experience: 工作经验要求
 - skills: 技能要求（返回字符串数组）
+- contact_info: 联系电话或邮箱
 
 要求：
 1. 若某字段在原文中不存在，将其值设为 null。
@@ -37,6 +38,7 @@ Fields:
 - education: education requirement
 - experience: work experience requirement
 - skills: required skills (return as array of strings)
+- contact_info: contact phone or email
 
 Rules:
 1. If a field is not present in the text, set its value to null.

@@ -20,7 +20,7 @@ def evaluate(
     for pred in matched:
         doc_id = pred["id"]
         labels = golden_map[doc_id]
-        lang = "zh" if doc_id.startswith("zh") else "en"
+        lang = "zh" if (doc_id.startswith("zh") or doc_id.startswith("img")) else "en"
 
         for f in FIELDS:
             pred_val = pred.get(f)

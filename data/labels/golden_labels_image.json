@@ -1,0 +1,193 @@
+[
+  {
+    "id": "img_001",
+    "language": "zh",
+    "labels": {
+      "job_title": "数据库管理员",
+      "company_name": "蔚来汽车",
+      "work_location": "重庆",
+      "salary": "15k-25k/月",
+      "education": "博士",
+      "experience": "1年以上经验",
+      "skills": [
+        "Flink",
+        "Nginx",
+        "Node.js"
+      ],
+      "contact_info": "13898765432"
+    }
+  },
+  {
+    "id": "img_020",
+    "language": "zh",
+    "labels": {
+      "job_title": "前端开发工程师",
+      "company_name": "字节跳动",
+      "work_location": "合肥",
+      "salary": "35k-55k/月",
+      "education": "硕士及以上",
+      "experience": "2年以上经验",
+      "skills": [
+        "C++",
+        "Git",
+        "Kafka",
+        "MySQL",
+        "Python"
+      ],
+      "contact_info": "15233445566"
+    }
+  },
+  {
+    "id": "img_009",
+    "language": "zh",
+    "labels": {
+      "job_title": "运维工程师",
+      "company_name": "滴滴出行",
+      "work_location": "广州",
+      "salary": "15k-25k/月",
+      "education": "硕士及以上",
+      "experience": "3年以上相关经验",
+      "skills": [
+        "Data Warehouse",
+        "Docker",
+        "RabbitMQ",
+        "Spark"
+      ],
+      "contact_info": "18612345678"
+    }
+  },
+  {
+    "id": "img_007",
+    "language": "zh",
+    "labels": {
+      "job_title": "运维工程师",
+      "company_name": "华为技术",
+      "work_location": "西安",
+      "salary": "20k-35k/月",
+      "education": "硕士及以上",
+      "experience": "3-5年工作经验",
+      "skills": [
+        "Node.js",
+        "Spark",
+        "TensorFlow",
+        "TypeScript"
+      ],
+      "contact_info": "18900112233"
+    }
+  },
+  {
+    "id": "img_027",
+    "language": "zh",
+    "labels": {
+      "job_title": "UI/UX设计师",
+      "company_name": "字节跳动",
+      "work_location": "天津",
+      "salary": "15k-25k/月",
+      "education": "本科",
+      "experience": "3年以上相关经验",
+      "skills": [
+        "Java",
+        "微服务架构",
+        "敏捷开发"
+      ],
+      "contact_info": "18900112233"
+    }
+  },
+  {
+    "id": "img_026",
+    "language": "zh",
+    "labels": {
+      "job_title": "产品经理",
+      "company_name": "快手科技",
+      "work_location": "上海",
+      "salary": "年薪30万-50万",
+      "education": "硕士及以上",
+      "experience": "5-8年经验",
+      "skills": [
+        "Azure",
+        "Data Warehouse",
+        "Rust"
+      ],
+      "contact_info": "18900112233"
+    }
+  },
+  {
+    "id": "img_022",
+    "language": "zh",
+    "labels": {
+      "job_title": "运营总监",
+      "company_name": "海康威视",
+      "work_location": "成都",
+      "salary": "10k-18k/月",
+      "education": "硕士",
+      "experience": "3-5年工作经验",
+      "skills": [
+        "Flink",
+        "Linux",
+        "Nginx",
+        "Rust",
+        "TypeScript"
+      ],
+      "contact_info": "15987654321"
+    }
+  },
+  {
+    "id": "img_016",
+    "language": "zh",
+    "labels": {
+      "job_title": "Java开发工程师",
+      "company_name": "腾讯科技",
+      "work_location": "南京",
+      "salary": "25k-40k/月",
+      "education": "计算机相关专业本科",
+      "experience": "2年以上经验",
+      "skills": [
+        "C++",
+        "Hadoop",
+        "Java",
+        "Redis"
+      ],
+      "contact_info": "13912345678"
+    }
+  },
+  {
+    "id": "img_019",
+    "language": "zh",
+    "labels": {
+      "job_title": "DevOps工程师",
+      "company_name": "理想汽车",
+      "work_location": "武汉",
+      "salary": "15k-25k/月",
+      "education": "硕士",
+      "experience": "5-8年经验",
+      "skills": [
+        "MongoDB",
+        "MySQL",
+        "React",
+        "微服务架构"
+      ],
+      "contact_info": "13566778899"
+    }
+  },
+  {
+    "id": "img_012",
+    "language": "zh",
+    "labels": {
+      "job_title": "运营总监",
+      "company_name": "美团",
+      "work_location": "南京",
+      "salary": "面议",
+      "education": "985/211本科及以上",
+      "experience": "1-3年经验",
+      "skills": [
+        "Java",
+        "Node.js",
+        "Python",
+        "RabbitMQ",
+        "Spring Boot",
+        "TensorFlow"
+      ],
+      "contact_info": "17788990011"
+    }
+  }
+]

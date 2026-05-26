@@ -9,6 +9,7 @@ FIELDS = [
     "education",
     "experience",
     "skills",
+    "contact_info",
 ]
 
 
@@ -34,3 +35,7 @@ class ExtractionState(TypedDict, total=False):
     final_result: dict
     # 评估
     evaluation: dict
+    # 多媒体
+    input_type: str
+    image_path: str
+    ocr_text: str
