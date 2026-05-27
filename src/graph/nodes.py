@@ -74,28 +74,14 @@ def ocr_node(state: ExtractionState) -> dict:
 
 
 def analyze_node(state: ExtractionState) -> dict:
-    """分析节点：让 LLM 分析文档特征，输出路由决策。"""
+    """分析节点：轻量路由分析，LLM 只判断文档特征不抽取字段。"""
     llm = _get_extractor("llm")
     language = state.get("language", "zh")
     text = state.get("cleaned_text", "")
-    title = state.get("title", "")
 
-    full_result = llm.extract(text, language)
+    routing = llm.route(text, language)
 
-    routing = {
-        "salary": "regex",
-        "education": "regex",
-        "experience": "regex",
-        "work_location": "regex+llm",
-        "company_name": "llm+regex",
-        "job_title": "llm+regex",
-        "skills": "dictionary+llm",
-    }
-
-    return {
-        "routing_decision": routing,
-        "llm_result": full_result,
-    }
+    return {"routing_decision": routing}
 
 
 def regex_node(state: ExtractionState) -> dict:
@@ -123,9 +109,7 @@ def dictionary_node(state: ExtractionState) -> dict:
 
 
 def llm_extract_node(state: ExtractionState) -> dict:
-    existing = state.get("llm_result")
-    if existing and any(v for v in existing.values()):
-        return {}
+    """LLM 全字段抽取节点：仅当路由激活时才被调用。"""
     llm = _get_extractor("llm")
     language = state.get("language", "zh")
     text = state.get("cleaned_text", "")
