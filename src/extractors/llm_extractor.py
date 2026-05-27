@@ -99,6 +99,19 @@ Example format:
 {"salary":"regex","education":"regex","experience":"regex","work_location":"regex+ner","contact_info":"regex","job_title":"ner+llm","company_name":"ner+llm","skills":"dictionary+llm"}"""
 
 
+def _strip_markdown_fence(content: str) -> str:
+    """Remove ``` fences and optional language tag from LLM response."""
+    content = content.strip()
+    if content.startswith("```"):
+        content = content.split("\n", 1)[-1]
+        if content.endswith("```"):
+            content = content[:-3]
+        content = content.strip()
+        if content.startswith("json"):
+            content = content[4:].strip()
+    return content
+
+
 class LLMExtractor(BaseExtractor):
     name = "llm"
 
@@ -114,6 +127,11 @@ class LLMExtractor(BaseExtractor):
 
     def route(self, text: str, language: str) -> dict:
         """轻量路由分析：只分析文档特征，返回 routing JSON，不做全字段抽取。"""
+        REQUIRED_FIELDS = [
+            "salary", "education", "experience", "work_location",
+            "contact_info", "job_title", "company_name", "skills",
+        ]
+
         system_prompt = ROUTE_PROMPT_ZH if language == "zh" else ROUTE_PROMPT_EN
         user_text = text[:1500]
 
@@ -123,18 +141,14 @@ class LLMExtractor(BaseExtractor):
         ]
 
         response = self.model.invoke(messages)
-        content = response.content.strip()
-
-        if content.startswith("```"):
-            content = content.split("\n", 1)[-1]
-            if content.endswith("```"):
-                content = content[:-3]
-            content = content.strip()
-            if content.startswith("json"):
-                content = content[4:].strip()
+        content = _strip_markdown_fence(response.content or "")
 
         try:
-            return json.loads(content)
+            parsed = json.loads(content)
+            for f in REQUIRED_FIELDS:
+                if f not in parsed:
+                    parsed[f] = "llm"
+            return parsed
         except json.JSONDecodeError:
             return {
                 "salary": "regex",
@@ -142,8 +156,8 @@ class LLMExtractor(BaseExtractor):
                 "experience": "regex",
                 "work_location": "regex+llm",
                 "contact_info": "regex",
-                "job_title": "llm+regex",
-                "company_name": "llm+regex",
+                "job_title": "ner+llm",
+                "company_name": "ner+llm",
                 "skills": "dictionary+llm",
             }
 
@@ -156,16 +170,7 @@ class LLMExtractor(BaseExtractor):
         ]
 
         response = self.model.invoke(messages)
-        content = response.content.strip()
-
-        # 清理可能的 markdown 代码块包裹
-        if content.startswith("```"):
-            content = content.split("\n", 1)[-1]
-            if content.endswith("```"):
-                content = content[:-3]
-            content = content.strip()
-            if content.startswith("json"):
-                content = content[4:].strip()
+        content = _strip_markdown_fence(response.content or "")
 
         try:
             parsed = json.loads(content)
