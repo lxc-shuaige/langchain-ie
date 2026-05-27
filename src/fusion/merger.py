@@ -37,6 +37,32 @@ def _pick(sources: list[dict], field: str) -> str | list[str] | None:
     return None
 
 
+def _which_extractors(regex, ner, dictionary, llm, uie, field: str) -> list[str]:
+    """返回哪些抽取器对该字段有非空输出。"""
+    sources = {
+        "regex": regex,
+        "ner": ner,
+        "dictionary": dictionary,
+        "llm": llm,
+        "uie": uie,
+    }
+    return [name for name, src in sources.items() if src.get(field)]
+
+
+def _merge_skills(regex, ner, dictionary, llm, uie) -> tuple[list[str] | None, str]:
+    """合并所有抽取器的技能列表（去重并集），返回 (技能列表, 来源标签)。"""
+    all_skills = set()
+    contributors = []
+    for name, src in [("dictionary", dictionary), ("llm", llm), ("uie", uie), ("ner", ner)]:
+        skills = src.get("skills")
+        if skills:
+            all_skills.update(skills)
+            contributors.append(name)
+    if not all_skills:
+        return None, "none"
+    return sorted(all_skills), "+".join(contributors)
+
+
 def _rule_first(regex, ner, dictionary, llm, uie, routing) -> dict:
     """规则优先：格式化字段用规则，语义字段用 LLM/UIE。"""
     result = {}
@@ -44,18 +70,24 @@ def _rule_first(regex, ner, dictionary, llm, uie, routing) -> dict:
     conflicts = []
 
     rule_fields = {"salary", "education", "experience", "work_location", "contact_info"}
-    semantic_fields = {"job_title", "company_name", "skills"}
+    semantic_fields = {"job_title", "company_name"}
 
     for f in FIELDS:
         if f in rule_fields:
             val = _pick([regex, ner, dictionary, llm], f)
-            extractor_breakdown[f] = "regex" if regex.get(f) else "llm"
+            contributors = _which_extractors(regex, ner, dictionary, llm, uie, f)
+            extractor_breakdown[f] = "+".join(contributors) if contributors else "none"
         elif f in semantic_fields:
             val = _pick([uie, llm, ner, dictionary], f)
-            extractor_breakdown[f] = "uie+llm"
+            contributors = _which_extractors(regex, ner, dictionary, llm, uie, f)
+            extractor_breakdown[f] = "+".join(contributors) if contributors else "none"
+        elif f == "skills":
+            val, label = _merge_skills(regex, ner, dictionary, llm, uie)
+            extractor_breakdown[f] = label
         else:
             val = _pick([llm, regex, ner, uie, dictionary], f)
-            extractor_breakdown[f] = "llm"
+            contributors = _which_extractors(regex, ner, dictionary, llm, uie, f)
+            extractor_breakdown[f] = "+".join(contributors) if contributors else "none"
 
         result[f] = val
 
@@ -86,14 +118,19 @@ def _llm_first(regex, ner, dictionary, llm, uie, routing) -> dict:
         llm_val = llm.get(f)
         rule_val = _pick([regex, ner, dictionary], f)
 
-        if llm_val:
+        if f == "skills":
+            val, label = _merge_skills(regex, ner, dictionary, llm, uie)
+            result[f] = val
+            extractor_breakdown[f] = label
+        elif llm_val:
             result[f] = llm_val
             extractor_breakdown[f] = "llm"
             if rule_val and str(rule_val) != str(llm_val):
                 conflicts.append(f)
         elif rule_val:
             result[f] = rule_val
-            extractor_breakdown[f] = "rule"
+            contributors = _which_extractors(regex, ner, dictionary, llm, uie, f)
+            extractor_breakdown[f] = "+".join(contributors)
         else:
             result[f] = _pick([uie], f)
             extractor_breakdown[f] = "uie"
@@ -118,13 +155,19 @@ def _field_level(regex, ner, dictionary, llm, uie, routing) -> dict:
     }
 
     for f in FIELDS:
-        tools_str = routing.get(f, "llm")
-        tool_names = [t.strip() for t in tools_str.split("+")]
-        sources = [tool_map.get(t, {}) for t in tool_names if t in tool_map]
-        sources.append(llm)  # fallback
-        val = _pick(sources, f)
-        result[f] = val
-        extractor_breakdown[f] = tools_str
+        if f == "skills":
+            val, label = _merge_skills(regex, ner, dictionary, llm, uie)
+            result[f] = val
+            extractor_breakdown[f] = label
+        else:
+            tools_str = routing.get(f, "llm")
+            tool_names = [t.strip() for t in tools_str.split("+")]
+            sources = [tool_map.get(t, {}) for t in tool_names if t in tool_map]
+            sources.append(llm)  # fallback
+            val = _pick(sources, f)
+            result[f] = val
+            contributors = _which_extractors(regex, ner, dictionary, llm, uie, f)
+            extractor_breakdown[f] = "+".join(contributors) if contributors else tools_str
 
     result["extractor_breakdown"] = extractor_breakdown
     result["conflicts"] = conflicts
