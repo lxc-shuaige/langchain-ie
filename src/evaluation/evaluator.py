@@ -40,7 +40,15 @@ def evaluate(
             else:
                 if isinstance(gold_val, list):
                     if isinstance(pred_val, list):
-                        match = set(str(x).lower() for x in pred_val) == set(str(x).lower() for x in gold_val)
+                        pred_set = set(str(x).lower() for x in pred_val)
+                        gold_set = set(str(x).lower() for x in gold_val)
+                        if not gold_set:
+                            match = False
+                        else:
+                            intersection = pred_set & gold_set
+                            union = pred_set | gold_set
+                            jaccard = len(intersection) / len(union)
+                            match = jaccard >= 0.5
                     else:
                         match = False
                 else:
@@ -75,10 +83,24 @@ def evaluate(
         s = lang_stats[lang]
         per_lang[lang] = _calc(s["tp"], s["fp"], s["fn"])
 
+    doc_jaccard = {}
+    for pred in matched:
+        doc_id = pred["id"]
+        gold_labels = golden_map[doc_id]
+        pred_skills = pred.get("skills")
+        gold_skills = gold_labels.get("skills")
+        if isinstance(pred_skills, list) and isinstance(gold_skills, list) and gold_skills:
+            pred_set = set(str(x).lower() for x in pred_skills)
+            gold_set = set(str(x).lower() for x in gold_skills)
+            inter = pred_set & gold_set
+            union = pred_set | gold_set
+            doc_jaccard[doc_id] = round(len(inter) / len(union), 4) if union else 0.0
+
     return {
         "overall": _calc(total_tp, total_fp, total_fn),
         "per_field": per_field,
         "per_language": per_lang,
+        "skills_jaccard": doc_jaccard,
     }
 
 
