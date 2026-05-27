@@ -3,10 +3,28 @@ import yaml
 from src.state import FIELDS
 
 
-def _load_strategy() -> str:
+def _load_config():
     with open("config.yaml", "r", encoding="utf-8") as f:
-        config = yaml.safe_load(f)
-    return config.get("fusion_strategy", "rule_first")
+        return yaml.safe_load(f)
+
+
+def _load_strategy() -> str:
+    return _load_config().get("fusion_strategy", "rule_first")
+
+
+def _load_weights() -> dict:
+    return _load_config().get("confidence_weights", {})
+
+
+def _field_type(field: str) -> str:
+    """返回字段的类型分类。"""
+    if field in ("salary", "education", "experience", "contact_info"):
+        return "formatted"
+    elif field in ("job_title", "company_name", "work_location"):
+        return "entity"
+    elif field == "skills":
+        return "list_field"
+    return "formatted"
 
 
 def merge_results(
@@ -24,6 +42,8 @@ def merge_results(
         return _rule_first(regex, ner, dictionary, llm, uie, routing)
     elif strategy == "llm_first":
         return _llm_first(regex, ner, dictionary, llm, uie, routing)
+    elif strategy == "weighted_vote":
+        return _weighted_vote(regex, ner, dictionary, llm, uie, routing)
     else:
         return _field_level(regex, ner, dictionary, llm, uie, routing)
 
@@ -171,4 +191,67 @@ def _field_level(regex, ner, dictionary, llm, uie, routing) -> dict:
 
     result["extractor_breakdown"] = extractor_breakdown
     result["conflicts"] = conflicts
+    return result
+
+
+def _weighted_vote(regex, ner, dictionary, llm, uie, routing) -> dict:
+    """加权投票融合：按字段类型给各抽取器分配置信度权重。"""
+    weights = _load_weights()
+    result = {}
+    extractor_breakdown = {}
+    conflicts = []
+    confidence = {}
+
+    tool_map = {
+        "regex": regex,
+        "ner": ner,
+        "dictionary": dictionary,
+        "llm": llm,
+        "uie": uie,
+    }
+
+    for f in FIELDS:
+        ftype = _field_type(f)
+        w = weights.get(ftype, {})
+
+        if f == "skills":
+            val, label = _merge_skills(regex, ner, dictionary, llm, uie)
+            result[f] = val
+            extractor_breakdown[f] = label
+            contributor_count = len(label.split("+")) if label != "none" else 0
+            confidence[f] = min(1.0, contributor_count / 3.0)
+        else:
+            scored = []
+            for name, src in tool_map.items():
+                v = src.get(f)
+                if v:
+                    scored.append((w.get(name, 0.1), name, v))
+            scored.sort(key=lambda x: x[0], reverse=True)
+
+            if scored:
+                best_weight, best_name, best_val = scored[0]
+                result[f] = best_val
+                confidence[f] = best_weight
+                contributors = _which_extractors(regex, ner, dictionary, llm, uie, f)
+                extractor_breakdown[f] = "+".join(contributors) if contributors else best_name
+            else:
+                result[f] = None
+                extractor_breakdown[f] = "none"
+                confidence[f] = 0.0
+
+        # 冲突检测
+        vals = set()
+        for src in [regex, ner, dictionary, llm, uie]:
+            v = src.get(f)
+            if v:
+                if isinstance(v, list):
+                    vals.add(tuple(sorted(v)))
+                else:
+                    vals.add(v)
+        if len(vals) > 1:
+            conflicts.append(f)
+
+    result["extractor_breakdown"] = extractor_breakdown
+    result["conflicts"] = conflicts
+    result["confidence"] = confidence
     return result
