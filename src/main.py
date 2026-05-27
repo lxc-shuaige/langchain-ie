@@ -21,6 +21,9 @@ def _load_config():
 
 def _run_text_pipeline(config: dict) -> list[dict]:
     """运行纯文本抽取流程，返回结果列表。"""
+    import concurrent.futures
+    import os as _os
+
     docs = load_corpus(config["paths"]["corpus_dir"])
     if not docs:
         print("错误: 语料目录为空，请先运行 python -m src.corpus.generator")
@@ -28,9 +31,10 @@ def _run_text_pipeline(config: dict) -> list[dict]:
 
     print(f"共 {len(docs)} 篇文本文档")
 
-    graph = build_graph()
-    all_results = []
-    for i, doc in enumerate(docs):
+    max_workers = config.get("processing", {}).get("max_workers", min(8, (_os.cpu_count() or 1) * 2))
+
+    def _process_one(doc):
+        graph = build_graph()
         initial_state = {
             "doc_id": doc.id,
             "language": doc.language,
@@ -41,16 +45,24 @@ def _run_text_pipeline(config: dict) -> list[dict]:
         result = final_state.get("final_result", {})
         result["id"] = doc.id
         result["language"] = doc.language
-        all_results.append(result)
+        return result
 
-        if (i + 1) % 10 == 0:
-            print(f"  已处理文本 {i + 1}/{len(docs)} 篇")
+    all_results = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(_process_one, doc): i for i, doc in enumerate(docs)}
+        for future in concurrent.futures.as_completed(futures):
+            all_results.append(future.result())
+            if (len(all_results)) % 10 == 0:
+                print(f"  已处理文本 {len(all_results)}/{len(docs)} 篇")
 
     return all_results
 
 
 def _run_image_pipeline(config: dict) -> list[dict]:
     """运行图片抽取流程，返回结果列表。"""
+    import concurrent.futures
+    import os as _os
+
     image_dir = config["paths"].get("image_dir", "data/images")
     docs = load_image_corpus(image_dir)
     if not docs:
@@ -59,9 +71,10 @@ def _run_image_pipeline(config: dict) -> list[dict]:
 
     print(f"共 {len(docs)} 张图片")
 
-    graph = build_graph()
-    all_results = []
-    for i, doc in enumerate(docs):
+    max_workers = config.get("processing", {}).get("max_workers", min(8, (_os.cpu_count() or 1) * 2))
+
+    def _process_one(doc):
+        graph = build_graph()
         initial_state = {
             "doc_id": doc.id,
             "language": doc.language,
@@ -74,10 +87,15 @@ def _run_image_pipeline(config: dict) -> list[dict]:
         result = final_state.get("final_result", {})
         result["id"] = doc.id
         result["language"] = doc.language
-        all_results.append(result)
+        return result
 
-        if (i + 1) % 5 == 0:
-            print(f"  已处理图片 {i + 1}/{len(docs)} 张")
+    all_results = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(_process_one, doc): i for i, doc in enumerate(docs)}
+        for future in concurrent.futures.as_completed(futures):
+            all_results.append(future.result())
+            if (len(all_results)) % 5 == 0:
+                print(f"  已处理图片 {len(all_results)}/{len(docs)} 张")
 
     return all_results
 
